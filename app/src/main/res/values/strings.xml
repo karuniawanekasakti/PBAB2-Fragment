@@ -12,8 +12,8 @@
     <!-- Text for the fragment. -->
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="yes_message">ARTICLE: Like</string>
-    <string name="no_message">ARTICLE: Thanks</string>
+    <string name="yes_message">ARTICLE: Arigathanks</string>
+    <string name="no_message">ARTICLE: Why Bro</string>
     <string name="question_article">LIKE THE ARTICLE?</string>
 
     <!-- Text for the challenge. -->
