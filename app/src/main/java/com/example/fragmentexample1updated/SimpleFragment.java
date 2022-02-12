@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class SimpleFragment extends Fragment {
+
+    private static final int YES = 0;
+    private static final int NO = 1;
+    private static final int NONE = 2;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,7 +67,43 @@ public class SimpleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_simple, container, false);
+        RadioGroup radioGroup = view.findViewById(R.id.radio_group);
+        TextView articleQuestionTextView = view.findViewById(R.id.question_textview);
+
+
+        RatingBar ratingBar = view.findViewById(R.id.ratingBar);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int i) {
+                RadioButton btn = radioGroup.findViewById(i);
+                int selectedIndex = radioGroup.indexOfChild(btn);
+
+                switch (selectedIndex){
+                    case YES:
+                        articleQuestionTextView.setText(R.string.yes_message);
+                        break;
+
+                    case NO:
+                        articleQuestionTextView.setText(R.string.no_message);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+
+                String myRating =(getString(R.string.my_rating)) + String.valueOf(ratingBar.getRating());
+                Toast.makeText(getContext(),myRating, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_simple, container, false);
+        return view;
     }
 }
